@@ -15,6 +15,15 @@ impl DnsHeader {
         if bytes.len() < 12 {
             return None;
         }
+
+        Some(DnsHeader {
+            id: u16::from_be_bytes([bytes[0], bytes[1]]),
+            flags: u16::from_be_bytes([bytes[2], bytes[3]]),
+            questions: u16::from_be_bytes([bytes[4], bytes[5]]),
+            answers: u16::from_be_bytes([bytes[6], bytes[7]]),
+            authority: u16::from_be_bytes([bytes[8], bytes[9]]),
+            additional: u16::from_be_bytes([bytes[10], bytes[11]]),
+        })
     }
 }
 
